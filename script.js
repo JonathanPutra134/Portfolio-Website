@@ -22,3 +22,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 6000);
   }
 });
+
+
+
+document.querySelectorAll('.accordion-toggle').forEach((btn) => {
+  btn.addEventListener('click', ()=> {
+    const panel = btn.nextElementSibling;
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+    btn.setAttribute('aria-expanded', String(!isOpen))
+    panel.hidden = isOpen;
+
+    const icon = btn.querySelector('.accordion-icon');
+    icon.textContent = isOpen ? '+' : '-';
+  });
+});
