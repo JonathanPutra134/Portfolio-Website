@@ -8,17 +8,97 @@ document.addEventListener("DOMContentLoaded", () => {
     slides[index].classList.add("active");
   }, 6000);
 
-  const educationSlides = document.querySelectorAll(".education-slide");
-  if (educationSlides.length > 0) {
-    let educationIndex = 0;
+  const educationActivities = [
+    {
+      image: "./assets/education-2.png",
+      alt: "Student Representative activity",
+      text: "Served as a Student Representative in the Virtual Mobility Programme on Environment, Social, and Governance (ESG), collaborating with representatives from various foreign countries.",
+    },
+    {
+      image: "./assets/education-3.png",
+      alt: "Committee member activity",
+      text: "Served as a Committee Member for the Informatics Department Orientation Program at Universitas Multimedia Nusantara (UMN), contributing to the coordination and execution of student orientation activities.",
+    },
+    {
+      image: "./assets/education-4.png",
+      alt: "Comparative study activity",
+      text: "Participated in a comparative study with the BINUS Informatics Department as part of an Informatics student organization, focusing on the exchange of knowledge, ideas, and best practices between student organizations and academic departments.",
+    },
+    {
+      image: "./assets/education-5.jpeg",
+      alt: "Teaching assistant activity",
+      text: "Served as a Teaching and Lab Assistant, supporting junior students in Algorithm and Data Structures and Web Programming classes.",
+    },
+    {
+      image: "./assets/education-6.jpg",
+      alt: "Student creativity project activity",
+      text: "Participated in a Student Creativity Project in collaboration with lecturers and fellow students to develop and deploy the Magfin (Maggot Finance) application, aimed at streamlining and improving the efficiency of community waste management transactions in Sepatan Timur District.",
+    },
+    {
+      image: "./assets/education-7.jpg",
+      alt: "Graduation activity",
+      text: "Celebrating graduation alongside my classmates after navigating two years of online learning because of covid and completing our final semester on campus, a milestone marked by perseverance, growth, and shared achievement.",
+    },
+  ];
 
-    educationSlides[0].classList.add("active");
+  const activityImage = document.getElementById("edu-activity-image");
+  const activityText = document.getElementById("edu-activity-text");
+  const activityPrev = document.querySelector(".edu-activity-prev");
+  const activityNext = document.querySelector(".edu-activity-next");
 
-    setInterval(() => {
-      educationSlides[educationIndex].classList.remove("active");
-      educationIndex = (educationIndex + 1) % educationSlides.length;
-      educationSlides[educationIndex].classList.add("active");
-    }, 6000);
+  if (activityImage && activityText && activityPrev && activityNext) {
+    let activityIndex = 0;
+    const activityOverlay = document.getElementById("edu-activity-overlay");
+    const activityOverlayImage = document.getElementById(
+      "edu-activity-overlay-image"
+    );
+    const activityOverlayClose = activityOverlay?.querySelector(".overlay-close");
+    const activityOverlayBackdrop =
+      activityOverlay?.querySelector(".overlay-backdrop");
+
+    const renderActivity = (nextIndex) => {
+      const activity = educationActivities[nextIndex];
+      activityImage.src = activity.image;
+      activityImage.alt = activity.alt;
+      activityText.textContent = activity.text;
+    };
+
+    activityPrev.addEventListener("click", () => {
+      activityIndex =
+        (activityIndex - 1 + educationActivities.length) %
+        educationActivities.length;
+      renderActivity(activityIndex);
+    });
+
+    activityNext.addEventListener("click", () => {
+      activityIndex = (activityIndex + 1) % educationActivities.length;
+      renderActivity(activityIndex);
+    });
+
+    if (activityOverlay && activityOverlayImage) {
+      activityImage.addEventListener("click", () => {
+        activityOverlayImage.src = activityImage.src;
+        activityOverlayImage.alt = activityImage.alt;
+        activityOverlay.hidden = false;
+        document.body.style.overflow = "hidden";
+      });
+
+      const closeActivityOverlay = () => {
+        activityOverlay.hidden = true;
+        document.body.style.overflow = "";
+      };
+
+      activityOverlayClose?.addEventListener("click", closeActivityOverlay);
+      activityOverlayBackdrop?.addEventListener("click", closeActivityOverlay);
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !activityOverlay.hidden) {
+          closeActivityOverlay();
+        }
+      });
+    }
+
+    renderActivity(activityIndex);
   }
 });
 

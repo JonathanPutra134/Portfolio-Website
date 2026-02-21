@@ -214,12 +214,12 @@
 
         <div class="education-content">
           <h1 style="text-align: center">Education</h1>
-          <div class="education-grid">
+          <div class="education-summary-grid">
             <div class="education-media portrait">
               <img src="./assets/education-background.jpg" alt="Education Image" class="education-img-1" width="500"
                 height="500" />
             </div>
-            <div class="education-text">
+            <div class="education-text education-summary-text">
               Completed a Bachelor’s degree in Informatics at Multimedia
               Nusantara University, officially graduating on 14 December 2024
               with a Cumlaude Distinction and IPK of 3.94/4.00
@@ -227,81 +227,60 @@
           </div>
 
           <h2 style="text-align: center">Activities</h2>
-          <section id="education" class="education-carousel" style="margin: 50px 50px">
-            <div class="carousel">
-              <div class="education-slide active">
-                <div class="education-slide-media">
-                  <img src="./assets/education-2.png" alt="Education Image" />
-                </div>
-                <div class="education-text">
+          <section class="education-carousel">
+            <div class="education-activity-viewer">
+              <div class="education-activity-frame">
+                <button
+                  class="edu-activity-nav edu-activity-prev"
+                  type="button"
+                  aria-label="Previous activity"
+                >
+                  &#8592;
+                </button>
+                <img
+                  id="edu-activity-image"
+                  src="./assets/education-2.png"
+                  alt="Student Representative activity"
+                />
+                <button
+                  class="edu-activity-nav edu-activity-next"
+                  type="button"
+                  aria-label="Next activity"
+                >
+                  &#8594;
+                </button>
+              </div>
+
+              <div class="education-activity-description">
+                <p id="edu-activity-text">
                   Served as a Student Representative in the Virtual Mobility
                   Programme on Environment, Social, and Governance (ESG),
                   collaborating with representatives from various foreign
                   countries.
-                </div>
+                </p>
               </div>
 
-              <div class="education-slide">
-                <div class="education-slide-media">
-                  <img src="./assets/education-3.png" alt="Education Image" />
-                </div>
-
-                <div class="education-text">
-                  Served as a Committee Member for the Informatics Department
-                  Orientation Program at Universitas Multimedia Nusantara
-                  (UMN), contributing to the coordination and execution of
-                  student orientation activities.
-                </div>
-              </div>
-
-              <div class="education-slide">
-                <div class="education-slide-media">
-                  <img src="./assets/education-4.png" alt="Education Image" />
-                </div>
-
-                <div class="education-text">
-                  Participated in a comparative study with the BINUS
-                  Informatics Department as part of an Informatics student
-                  organization, focusing on the exchange of knowledge, ideas,
-                  and best practices between student organizations and
-                  academic departments.
-                </div>
-              </div>
-
-              <div class="education-slide">
-                <div class="education-slide-media">
-                  <img src="./assets/education-5.jpeg" alt="Education Image" />
-                </div>
-
-                <div class="education-text">
-                  Served as a Teaching and Lab Assistant, supporting junior
-                  students in Algorithm and Data Structures and Web
-                  Programming classes
-                </div>
-              </div>
-              <div class="education-slide">
-                <div class="education-slide-media">
-                  <img src="./assets/education-6.jpg" alt="Education Image" />
-                </div>
-
-                <div class="education-text">
-                  Participated in a Student Creativity Project in
-                  collaboration with lecturers and fellow students to develop
-                  and deploy the Magfin (Maggot Finance) application, aimed at
-                  streamlining and improving the efficiency of community waste
-                  management transactions in Sepatan Timur District.
-                </div>
-              </div>
-              <div class="education-slide">
-                <div class="education-slide-media">
-                  <img src="./assets/education-7.jpg" alt="Education Image" />
-                </div>
-
-                <div class="education-text">
-                  Celebrating graduation alongside my classmates after
-                  navigating two years of online learning because of covid and
-                  completing our final semester on campus, a milestone marked
-                  by perseverance, growth, and shared achievement.
+              <div class="overlay" id="edu-activity-overlay" hidden>
+                <div class="overlay-backdrop"></div>
+                <div
+                  class="overlay-content"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="Education activity image preview"
+                >
+                  <button
+                    class="overlay-close"
+                    type="button"
+                    aria-label="Close preview"
+                  >
+                    X
+                  </button>
+                  <img
+                    class="overlay-image"
+                    id="edu-activity-overlay-image"
+                    src=""
+                    alt=""
+                  />
                 </div>
               </div>
             </div>
