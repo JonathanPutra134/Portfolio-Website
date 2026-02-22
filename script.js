@@ -244,11 +244,11 @@ const certIssuer = document.getElementById("cert-issuer");
 const certDate = document.getElementById("cert-date");
 const btnLeft = document.querySelector(".cert-left");
 const btnRight = document.querySelector(".cert-right");
+const certAnimatedEls = [certImage, certTitle, certText, certIssuer, certDate];
 
-
- const overlay = cert.querySelector(".overlay");
- const overlayImage = cert.querySelector(".overlay-image");
- const closeBtn = cert.querySelector(".overlay-close");
+const overlay = cert.querySelector(".overlay");
+const overlayImage = cert.querySelector(".overlay-image");
+const closeBtn = cert.querySelector(".overlay-close");
 const backdrop = cert.querySelector(".overlay-backdrop");
 
   certImage.addEventListener("click", () => {
@@ -275,7 +275,6 @@ const backdrop = cert.querySelector(".overlay-backdrop");
   });
 
 function renderCertificate(index) {
-  console.log("INI RENDER CERTIFICATE")
   const cert = certificates[index];
   certImage.src = cert.image;
   certImage.alt = cert.alt;
@@ -283,21 +282,50 @@ function renderCertificate(index) {
   certText.textContent = cert.text;
   certDate.textContent = cert.date;
   certIssuer.textContent = cert.issuer;
-
-
 }
 
+renderCertificate(currentIndex);
+certAnimatedEls.forEach((el) => el.classList.add("cert-active"));
+
 btnLeft.addEventListener("click", () => {
-  currentIndex = (currentIndex - 1 + certificates.length) % certificates.length
-  renderCertificate(currentIndex);
+  const nextIndex = (currentIndex - 1 + certificates.length) % certificates.length;
+  animateCertificateSwitch("prev", nextIndex);
+  currentIndex = nextIndex;
 })
 
 btnRight.addEventListener("click", () => {
-  currentIndex = (currentIndex + 1) % certificates.length;
-  renderCertificate(currentIndex);
+  const nextIndex = (currentIndex + 1) % certificates.length;
+  animateCertificateSwitch("next", nextIndex);
+  currentIndex = nextIndex;
 });
 
-renderCertificate(currentIndex);
 
 
+
+function animateCertificateSwitch(direction, nextindex) {
+  const exitClass = direction === "next" ? "cert-exit-left" : "cert-exit-right";
+  const enterClass = direction === "next" ? "cert-enter-right" : "cert-enter-left";
+
+  certAnimatedEls.forEach((el) => {
+    el.classList.remove("cert-active", "cert-enter-left", "cert-enter-right");
+    el.classList.add(exitClass);
+  });
+  
+  
+  setTimeout(() => {
+    renderCertificate(nextindex);
+
+    certAnimatedEls.forEach((el) => {
+      el.classList.remove("cert-exit-left", "cert-exit-right");
+      el.classList.add(enterClass);
+    });
+
+    requestAnimationFrame(() => {
+      certAnimatedEls.forEach((el) => {
+        el.classList.remove("cert-enter-left", "cert-enter-right");
+        el.classList.add("cert-active")
+      });
+    });
+  }, 250);
+}
 

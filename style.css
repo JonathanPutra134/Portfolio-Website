@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+* { min-width: 0; } 
+p, h1, h2, h3, span { overflow-wrap: anywhere; }
+
+html, body { overflow-x: clip; } 
+
+
 body {
   margin: 0;
 }
@@ -173,6 +179,14 @@ body {
   transition: color 0.2s ease;
 }
 
+.section-nav h2 {
+  margin: 0;
+  font-size: inherit;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
 .contacts{
   padding: 4rem 0rem;
   top: 5rem;
@@ -258,7 +272,6 @@ body {
   margin-bottom: 12px;
 }
 
-/* Caption description */
 .about-slide-content h3 {
   font-family: 'Inter', sans-serif;
   font-size: rem;
@@ -705,6 +718,27 @@ body {
   color: #f4f4f4;
 }
 
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+
+.project-tech span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: #c9ddff;
+  background: rgba(105, 153, 255, 0.14);
+  border: 1px solid rgba(130, 176, 255, 0.35);
+}
+
 .project-info p {
   margin: 0 0 18px;
   color: rgba(255, 255, 255, 0.7);
@@ -712,18 +746,33 @@ body {
   font-size: 0.98rem;
 }
 
+.project-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 16px;
+}
+
 .project-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 34px;
-  padding: 0 16px;
+  min-height: 36px;
+  padding: 8px 14px;
   border-radius: 999px;
-  background: #f3f3f3;
-  color: #111;
-  font-size: 0.85rem;
+  background: linear-gradient(135deg, #f5f8ff 0%, #dbe6ff 100%);
+  color: #0d1630;
+  border: 1px solid rgba(206, 222, 255, 0.95);
+  font-size: 0.8rem;
+  letter-spacing: 0.01em;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.project-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(4, 9, 24, 0.35);
 }
 
 .project-media {
@@ -1056,11 +1105,10 @@ body {
   width: 100%;
   height: min(62vh, 560px);
   display: block;
-  object-fit: contain; /* use cover if you prefer edge-to-edge crop */
+  object-fit: contain; 
   background: #0a1022;
 }
 
-/* Row 2: description card */
 .certificate-description {
   border-radius: 14px;
   padding: 22px 24px;
@@ -1101,9 +1149,69 @@ body {
   border: 1px solid rgba(138, 176, 255, 0.32);
 }
 
-/* Responsive */
+/* Certificate transition base */
+#cert-image,
+#cert-title,
+#cert-text,
+#cert-issuer,
+#cert-date {
+  transition: transform 220ms ease, opacity 220ms ease;
+  will-change: transform, opacity;
+}
+
+/* slide out */
+.cert-exit-left { transform: translateX(-22px); opacity: 0; }
+.cert-exit-right { transform: translateX(22px); opacity: 0; }
+
+/* slide in */
+.cert-enter-left { transform: translateX(22px); opacity: 0; }
+.cert-enter-right { transform: translateX(-22px); opacity: 0; }
+
+/* final state */
+.cert-active { transform: translateX(0); opacity: 1; }
+
+img, video { max-width: 100%; height: auto; }
+@media (max-width: 580px) { 
+  .page { font-size: 1rem; }
+  .profile-info { max-width: 100%; width: 100%; }
+  .sidebar { padding: 20px 16px; }
+  .tagline { font-size: 1rem; line-height: 1.6; }
+  .name { font-size: 2rem; }
+  .role { font-size: 1.2rem; }
+
+  .project-shell,
+  .experience-shell,
+  .certificate-shell,
+  .education-carousel {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .project-card,
+  .education-grid {
+    grid-template-columns: 1fr;
+  }
+  .project-tech,
+  .experience-tech,
+  .project-cta-group {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+   .project-cta {
+    font-size: 0.75rem;
+    padding: 6px 10px;
+  }
+ }
+
+
+
+
+
+
+
 @media (max-width: 1315px) {
-  .certificate-section {
+   .certificate-section {
     padding: 64px 24px;
   }
 
@@ -1128,10 +1236,6 @@ body {
     font-size: 0.95rem;
     line-height: 1.6;
   }
-}
-
-
-@media (max-width: 1315px) {
   .name {
     font-size: 2.75rem;
   }
@@ -1275,6 +1379,22 @@ body {
     line-height: 1.6;
   }
 
+  .project-tech span {
+    min-height: 28px;
+    padding: 5px 12px;
+    font-size: 0.74rem;
+  }
+
+  .project-cta-group {
+    gap: 8px;
+  }
+
+  .project-cta {
+    min-height: 34px;
+    padding: 7px 12px;
+    font-size: 0.76rem;
+  }
+
  .project-thumbnails {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -1309,6 +1429,34 @@ body {
   .certificate-description p {
     font-size: 0.95rem;
     line-height: 1.6;
+  }
+}
+
+@media (max-width: 600px) {
+  .section-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 14px;
+    margin-top: 1.5rem;
+  }
+
+  .section-nav li,
+  .section-nav li:nth-child(-n+3),
+  .section-nav li:nth-child(n+4) {
+    margin: 0;
+    flex: unset;
+  }
+
+  .section-nav a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 8px 6px;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
   }
 }
 
