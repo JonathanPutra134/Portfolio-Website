@@ -7,7 +7,10 @@
 * { min-width: 0; } 
 p, h1, h2, h3, span { overflow-wrap: anywhere; }
 
-html, body { overflow-x: clip; } 
+html, body {
+  overflow-x: clip;
+  background: #070d1c;
+} 
 
 
 body {
@@ -304,7 +307,7 @@ body {
 .education-bg {
   position: absolute;
   inset: 0;
-  background-image: url('/assets/education-background.jpg');
+  background-image: url('./assets/education-background.jpg');
   background-size: cover;
   background-position: center;
   filter: blur(6px) saturate(1.08);
@@ -985,7 +988,7 @@ body {
 .overlay-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(8, 14, 30, 0.45);
+  background: rgba(8, 14, 30, 0.62);
   backdrop-filter: blur(8px);
 }
 
